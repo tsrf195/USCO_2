@@ -31,8 +31,10 @@ public class PersonaController {
         return new ResponseEntity<>(personaService.listarRoles(persona.getId()), HttpStatus.OK);
     }
 
+    //mover todos los if al servicio (mejor y más avanzado, la capa de controller no se debería de encargar de esto)
     @PostMapping("crear")
     public ResponseEntity<?> crear(@RequestBody Persona persona){
+        System.out.println("estoy llegando al back para crear");
         if (persona.getName() == null){
             return new ResponseEntity<>("El nombre es obligatorio", HttpStatus.BAD_REQUEST);
         }
@@ -42,7 +44,11 @@ public class PersonaController {
         if (persona.getDob() == null){
             return new ResponseEntity<>("La fecha de nacimiento es obligatorio", HttpStatus.BAD_REQUEST);
         }
-        Persona persona_nueva = new Persona(persona.getName(), persona.getPassword(), persona.getEmail(), persona.getDob());
+        System.out.println("estoy en el controller"+ persona.getPassword());
+        System.out.println("estoy en el controller"+ persona.getUsername());
+        Persona persona_nueva = new Persona(persona.getName(), persona.getPassword(), persona.getEmail(), persona.getDob(), persona.getUsername());
+        System.out.println("estoy en el controller con persona nueva: "+ persona_nueva.getPassword());
+        System.out.println("estoy en el controller con persona nueva: "+ persona_nueva.getUsername());
         personaService.save(persona_nueva);
         return new ResponseEntity<>("Usuario Creado", HttpStatus.OK);
     }

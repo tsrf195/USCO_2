@@ -9,8 +9,12 @@ public class Consultorio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "direccion", nullable = false)
+    private String direccion;
+
     @ManyToOne
     @JoinColumn(name = "ciudad_id")
     private Ciudad ciudad;
+
 
 }

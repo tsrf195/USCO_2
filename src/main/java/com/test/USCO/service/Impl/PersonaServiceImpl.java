@@ -30,6 +30,11 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
+    public Boolean existsById(long id) {
+        return personaRepository.existsById(id);
+    }
+
+    @Override
     public Boolean existsByUsername(String username){
         return personaRepository.existsByUserName(username);
     }
@@ -54,7 +59,9 @@ public class PersonaServiceImpl implements PersonaService {
     @Override
     public void save(Persona persona) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        System.out.println("contraseña: " + persona.getPassword());
         persona.setPassword(passwordEncoder.encode(persona.getPassword()));
+        System.out.println("usuario en save: " + persona.getUsername());
         personaRepository.save(persona);
     }
 }

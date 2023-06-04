@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UsuarioMain implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
     private String nombre;
     private String usuario;
     private String email;
@@ -16,7 +16,7 @@ public class UsuarioMain implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UsuarioMain(String nombre, String usuario, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(String nombre, String usuario, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.nombre = nombre;
         this.usuario = usuario;
         this.email = email;
@@ -24,11 +24,11 @@ public class UsuarioMain implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static UsuarioMain build(Persona persona){
+    public static UserDetailsImpl build(Persona persona){
         List<GrantedAuthority> authorities = persona.getRoles().stream()
                 .map(rol -> new SimpleGrantedAuthority(rol.getNombre()))
                 .collect(Collectors.toList());
-        return new UsuarioMain(persona.getName(), persona.getUsername(), persona.getEmail(), persona.getPassword(), authorities);
+        return new UserDetailsImpl(persona.getName(), persona.getUsername(), persona.getEmail(), persona.getPassword(), authorities);
     }
 
     @Override
