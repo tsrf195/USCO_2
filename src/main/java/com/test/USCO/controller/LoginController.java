@@ -1,11 +1,19 @@
 package com.test.USCO.controller;
 
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
+import com.test.USCO.entity.Persona;
+import com.test.USCO.service.PersonaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.Optional;
+
+@RestController
+@RequestMapping(path = "/api/persona/")
+@CrossOrigin(origins = "http://localhost:4200")
 public class LoginController {
     @Autowired
     PersonaService personaService;
@@ -22,10 +30,5 @@ public class LoginController {
 //            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 //        }
 //    }
-
-   @GetMapping("/login")
-    String login() {
-       return "login";
-   }
 
 }

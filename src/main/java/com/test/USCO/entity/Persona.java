@@ -43,4 +43,14 @@ public class Persona {
     private Set<Rol> roles = new HashSet<>();
 
 
+    public Persona(String name, String password, String email, LocalDate dob,String username) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.dob = dob;
+        this.username = username;
+    }
+
+    public Persona() {
+    }
 }

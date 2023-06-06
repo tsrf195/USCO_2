@@ -36,13 +36,15 @@ public class PersonaServiceImpl implements PersonaService {
 
     @Override
     public Boolean existsByUsername(String username){
-        return personaRepository.existsByUserName(username);
+        System.out.println("ESTE ES EL USUARIO QUE ESTÁ EN LA IMPLEMENTACION DE EXISTBYUSERNAME:"+username);
+        return personaRepository.existsByUsername(username);
     }
 
     @Override
     public Boolean existsByEmail(String username){
         return personaRepository.existsByEmail(username);
     }
+
 
     @Override
     public List<UserGrantedAuthority> listarRoles(long usuario){

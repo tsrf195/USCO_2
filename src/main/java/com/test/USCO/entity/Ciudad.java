@@ -11,14 +11,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Ciudad{
     @Id
-    @SequenceGenerator(
-            name = "city_sequence",
-            sequenceName = "city_sequence",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "city_sequence"
+            strategy = GenerationType.AUTO
     )
     @Column(name = "id",nullable = false)
     private Long id;

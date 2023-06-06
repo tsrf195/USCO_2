@@ -20,6 +20,6 @@ public interface IPersonaRepository extends JpaRepository<Persona, Long> {
 
     public UserDetails findByEmail(String email);
 
-    boolean existsByUserName(String username);
+    boolean existsByUsername(String username);
     boolean existsByEmail(String email);
 }

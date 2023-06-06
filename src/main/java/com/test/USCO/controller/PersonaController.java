@@ -2,9 +2,6 @@ package com.test.USCO.controller;
 
 import com.test.USCO.config.UserGrantedAuthority;
 import com.test.USCO.entity.Persona;
-import com.test.USCO.entity.Persona_Roles;
-import com.test.USCO.entity.Rol;
-import com.test.USCO.service.Impl.PersonaServiceImpl;
 import com.test.USCO.service.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/persona/")
+@RequestMapping(path = "/api/persona/")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PersonaController {
 
     @Autowired
@@ -65,6 +63,32 @@ public class PersonaController {
         System.out.println("estoy en el controller con persona nueva: "+ persona_nueva.getUsername());
         personaService.save(persona_nueva);
         return new ResponseEntity<>("Usuario Creado", HttpStatus.OK);
+    }
+
+
+
+    @PutMapping("actualizar/{id}")
+    public ResponseEntity<?> actualizar(@PathVariable("id") long id ,@RequestBody Persona persona){
+        if (personaService.existsById(persona.getId()))
+            return new ResponseEntity<>("Usuario no existe.", HttpStatus.NOT_FOUND);
+        if (personaService.existsByEmail(persona.getEmail())){
+            System.out.println("correo siendo usado por otro usuario");
+            return new ResponseEntity<>("Correo ya esta siendo usado.", HttpStatus.BAD_REQUEST);
+        }
+        if (!personaService.existsByUsername(persona.getUsername()))
+            return new ResponseEntity<>("Username ya esta siendo usado", HttpStatus.BAD_REQUEST);
+
+        if (persona.getName() == null){
+            return new ResponseEntity<>("El nombre es obligatorio", HttpStatus.BAD_REQUEST);
+        }
+        if (persona.getEmail() == null){
+            return new ResponseEntity<>("El email es obligatorio", HttpStatus.BAD_REQUEST);
+        }
+        if (persona.getDob() == null){
+            return new ResponseEntity<>("La fecha de nacimiento es obligatorio", HttpStatus.BAD_REQUEST);
+        }
+        personaService.save(persona);
+        return new ResponseEntity<>("Persona Actualizada.", HttpStatus.OK);
     }
 
 

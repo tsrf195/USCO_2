@@ -11,15 +11,7 @@ import javax.persistence.*;
 @Table(name = "departamento")
 public class Departamento {
     @Id
-    @SequenceGenerator(
-            name = "dept_sequence",
-            sequenceName = "dept_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "dept_sequence"
-    )
+    @GeneratedValue( strategy = GenerationType.AUTO)
     @Column(name = "id",nullable = false)
     private Long id;
     @Column(name = "nombre",nullable = false)

@@ -14,6 +14,8 @@ public interface PersonaService  {
 
     Optional<Persona> getByUserName(String username);
 
+    Boolean existsById(long id);
+
     Boolean existsByUsername(String username);
 
     Boolean existsByEmail(String username);
