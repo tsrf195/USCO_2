@@ -30,6 +30,20 @@ public class PersonaController {
 
         return new ResponseEntity<>(personaService.listarRoles(persona.getId()), HttpStatus.OK);
     }
+    @PostMapping("login")
+    public ResponseEntity<?> login(@RequestBody String username, String password) {
+
+        System.out.println("estoy llegando a la funciona de login en el back :D");
+        boolean isValidUser = personaService.existsByUsername(username);
+        System.out.println("estado del boolean: "+ isValidUser );
+        if (isValidUser) {
+            System.out.println("estás entrandooooooooo con un usuario vaaaalido");
+            return ResponseEntity.ok().build();
+        } else {
+            System.out.println("no estoy encontrando la persona con usuario: "+ username);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
 
     //mover todos los if al servicio (mejor y más avanzado, la capa de controller no se debería de encargar de esto)
     @PostMapping("crear")

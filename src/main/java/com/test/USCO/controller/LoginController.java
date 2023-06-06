@@ -9,19 +9,19 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
     @Autowired
     PersonaService personaService;
-    @PostMapping("login")
-    public ResponseEntity<?> login(@RequestBody String username, String password) {
-
-        boolean isValidUser = personaService.existsByUsername(username);
-
-        if (isValidUser) {
-            // Return success response
-            return ResponseEntity.ok().build();
-        } else {
-            // Return error response
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-    }
+//    @PostMapping("login")
+//    public ResponseEntity<?> login(@RequestBody String username, String password) {
+//        System.out.println("estoy llegando a la funciona de login en el back :D");
+//        boolean isValidUser = personaService.existsByUsername(username);
+//
+//        if (isValidUser) {
+//            System.out.println("estás entrandooooooooo con un usuario vaaaalido");
+//            return ResponseEntity.ok().build();
+//        } else {
+//            System.out.println("no estoy encontrando la persona con usuario: "+ username);
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+//        }
+//    }
 
    @GetMapping("/login")
     String login() {
